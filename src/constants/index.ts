@@ -19,3 +19,7 @@ export const IMG_FILENAME = Object.freeze({
   양식: 'category-western',
   기타: 'category-etc',
 });
+
+export const LOCAL_STORAGE_KEY = Object.freeze({
+  restaurants: 'lunch_app_restaurants',
+});

@@ -11,6 +11,8 @@ import RestaurantDetailModal from './components/RestaurantDetailModal';
 import Restaurants from './domain/Restaurants';
 import Validator from './domain/Validator';
 
+import { LOCAL_STORAGE_KEY } from './constants';
+
 export default class App {
   restaurants;
   state;
@@ -22,7 +24,7 @@ export default class App {
       navTab: '모든 음식점',
     };
 
-    const restaurantsData = store.getLocalStorage('lunch_app_restaurants');
+    const restaurantsData = store.getLocalStorage(LOCAL_STORAGE_KEY.restaurants);
     this.restaurants = new Restaurants(restaurantsData);
 
     new Header(this.onClickAddRestaurantButton.bind(this));
@@ -118,7 +120,7 @@ export default class App {
 
     const updatedRestaurants = this.restaurants.updateRestaurant(clickedRestaurant.id, isLiked);
 
-    store.setLocalStorage('lunch_app_restaurants', updatedRestaurants);
+    store.setLocalStorage(LOCAL_STORAGE_KEY.restaurants, updatedRestaurants);
   }
 
   displayFilledStarIconIfLiked(clickedRestaurantId, isLiked) {
@@ -159,7 +161,7 @@ export default class App {
     };
 
     this.restaurants.addRestaurant(restaurant);
-    store.setLocalStorage('lunch_app_restaurants', this.restaurants.getRestaurants());
+    store.setLocalStorage(LOCAL_STORAGE_KEY.restaurants, this.restaurants.getRestaurants());
 
     this.toggleAddRestaurantModal();
 
@@ -175,7 +177,7 @@ export default class App {
     $(`#${restaurantId}`).remove();
     this.toggleRestaurantDetailModal();
 
-    store.setLocalStorage('lunch_app_restaurants', restaurants);
+    store.setLocalStorage(LOCAL_STORAGE_KEY.restaurants, restaurants);
   }
 
   toggleAddRestaurantModal() {
