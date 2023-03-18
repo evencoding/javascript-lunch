@@ -7,7 +7,11 @@ const store = {
     const data = localStorage.getItem(key);
 
     if (data) {
-      return JSON.parse(data);
+      try {
+        return JSON.parse(data);
+      } catch {
+        return [];
+      }
     }
   },
 };
